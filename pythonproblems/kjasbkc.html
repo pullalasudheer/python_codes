@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Placement Prediction — Form (HTML + CSS)</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --accent:#2563eb;
+      --muted:#6b7280;
+      --border:#e6e9ef;
+      --radius:12px;
+      --maxw:880px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+      color:#0f172a;
+      padding:28px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{max-width:var(--maxw);margin:0 auto}
+    header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    h1{font-size:20px;margin:0}
+    .lead{font-size:13px;color:var(--muted)}
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:0 8px 24px rgba(16,24,40,0.06);
+      border:1px solid rgba(15,23,42,0.03);
+    }
+
+    form{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      align-items:start;
+    }
+
+    label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    .field{
+      margin-bottom:6px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select,
+    textarea{
+      width:100%;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      font-size:14px;
+      color:#0f172a;
+      background:#fff;
+      outline:none;
+    }
+
+    textarea{min-height:84px;resize:vertical}
+    .full{grid-column:1 / -1}
+
+    .actions{
+      grid-column:1 / -1;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-top:8px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:600;
+      text-decoration:none;
+      border:0;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+    }
+
+    .btn-muted{
+      background:#f1f5f9;
+      color:#0f172a;
+      border:1px solid #e6edf8;
+    }
+
+    .note{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      width:100%;
+    }
+
+    @media (max-width:720px){
+      form{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+    }
+
+    /* small visual helpers */
+    .meta{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* subtle focus */
+    input:focus, select:focus, textarea:focus{
+      box-shadow:0 0 0 4px rgba(37,99,235,0.06);
+      border-color:rgba(37,99,235,0.6);
+    }
+
+    /* accessible hidden text for non-JS state */
+    .no-js-note{
+      margin-top:12px;
+      padding:10px;
+      background:#fff7ed;
+      border:1px solid #ffedd5;
+      border-radius:8px;
+      color:#92400e;
+      font-size:13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Placement Prediction — Input</h1>
+      <div class="lead">HTML + CSS only (no JavaScript)</div>
+    </header>
+
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title" style="margin:0 0 12px 0;font-size:15px">Candidate details</h2>
+
+      <form method="post" action="#" novalidate>
+        <div>
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" placeholder="e.g. Priya Sharma" />
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" />
+        </div>
+
+        <div>
+          <label for="cgpa">CGPA (0 - 10)</label>
+          <input id="cgpa" name="cgpa" type="number" step="0.01" min="0" max="10" placeholder="8.2" />
+        </div>
+
+        <div>
+          <label for="tenth">10th (%)</label>
+          <input id="tenth" name="tenth" type="number" step="0.01" min="0" max="100" placeholder="85" />
+        </div>
+
+        <div>
+          <label for="twelfth">12th (%)</label>
+          <input id="twelfth" name="twelfth" type="number" step="0.01" min="0" max="100" placeholder="82" />
+        </div>
+
+        <div>
+          <label for="branch">Branch</label>
+          <select id="branch" name="branch">
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="IT">IT</option>
+            <option value="ME">Mechanical</option>
+            <option value="CE">Civil</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="internships">Internships (count)</label>
+          <input id="internships" name="internships" type="number" min="0" step="1" value="0" />
+        </div>
+
+        <div>
+          <label for="projects">Projects (count)</label>
+          <input id="projects" name="projects" type="number" min="0" step="1" value="0" />
+        </div>
+
+        <div>
+          <label for="technicalScore">Technical test score (0-100)</label>
+          <input id="technicalScore" name="technicalScore" type="number" min="0" max="100" step="0.1" />
+        </div>
+
+        <div>
+          <label for="aptitudeScore">Aptitude test score (0-100)</label>
+          <input id="aptitudeScore" name="aptitudeScore" type="number" min="0" max="100" step="0.1" />
+        </div>
+
+        <div class="full">
+          <label for="skills">Skills (comma-separated)</label>
+          <textarea id="skills" name="skills" placeholder="Python, SQL, Data Structures"></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Predict (submit)</button>
+          <button type="reset" class="btn btn-muted">Reset</button>
+          <div class="note">No JavaScript: backend integration requires a server endpoint (form action).</div>
+        </div>
+
+        <div class="full meta" aria-hidden="true">
+          <div>Tip: set <code>action=\"/api/predict\"</code> on the &lt;form&gt; to post data to your server.</div>
+        </div>
+
+        <div class="full no-js-note" role="status">
+          This page contains only HTML and CSS. If you want live prediction in-browser, add JavaScript—otherwise submit the form to a server.
+        </div>
+      </form>
+    </section>
+  </div>
+</body>
+</html>
